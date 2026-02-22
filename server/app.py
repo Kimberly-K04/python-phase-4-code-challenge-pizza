@@ -99,24 +99,28 @@ def create_restaurant_pizza():
         errors.append("Price must be between 1 and 30")
 
     if errors:
-        return {"errors": errors}, 400
+        return {"errors": ["validation errors"]}, 400
 
     restaurant_pizza = RestaurantPizza(price=price, pizza=pizza, restaurant=restaurant)
     db.session.add(restaurant_pizza)
     db.session.commit()
 
-    # Return the created RestaurantPizza
     return jsonify({
-        "id": restaurant_pizza.id,
-        "price": restaurant_pizza.price,
-        "pizza_id": restaurant_pizza.pizza_id,
-        "restaurant_id": restaurant_pizza.restaurant_id,
-        "pizza": {
-            "id": pizza.id,
-            "name": pizza.name,
-            "ingredients": pizza.ingredients
-        } if pizza else None
-    }), 201
+    "id": restaurant_pizza.id,
+    "price": restaurant_pizza.price,
+    "pizza_id": restaurant_pizza.pizza_id,
+    "restaurant_id": restaurant_pizza.restaurant_id,
+    "pizza": {
+        "id": pizza.id,
+        "name": pizza.name,
+        "ingredients": pizza.ingredients
+    } if pizza else None,
+    "restaurant": {
+        "id": restaurant.id,
+        "name": restaurant.name,
+        "address": restaurant.address
+    } if restaurant else None
+}), 201
 
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
