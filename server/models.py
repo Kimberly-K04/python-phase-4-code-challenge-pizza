@@ -3,6 +3,7 @@ from sqlalchemy.orm import validates
 from sqlalchemy_serializer import SerializerMixin
 
 db = SQLAlchemy()
+
 class Restaurant(db.Model, SerializerMixin):
     __tablename__ = "restaurants"
 

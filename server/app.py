@@ -21,7 +21,6 @@ migrate = Migrate(app, db)
 def index():
     return "<h1>Code challenge</h1>"
 
-
 # GET /restaurants
 @app.route("/restaurants", methods=["GET"])
 def get_restaurants():
@@ -31,7 +30,7 @@ def get_restaurants():
         for r in restaurants
     ])
 
-# GET /restaurants/<id>
+# GET /restaurants
 @app.route("/restaurants/<int:id>", methods=["GET"])
 def get_restaurant(id):
     restaurant = Restaurant.query.get(id)
@@ -68,6 +67,7 @@ def delete_restaurant(id):
     db.session.commit()
     return "", 204
 
+#GET /pizzas
 @app.route("/pizzas", methods=["GET"])
 def get_pizzas():
     pizzas = Pizza.query.all()
