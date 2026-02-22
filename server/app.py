@@ -101,6 +101,7 @@ def create_restaurant_pizza():
     if errors:
         return {"errors": ["validation errors"]}, 400
 
+
     restaurant_pizza = RestaurantPizza(price=price, pizza=pizza, restaurant=restaurant)
     db.session.add(restaurant_pizza)
     db.session.commit()
